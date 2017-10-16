@@ -7,12 +7,12 @@ follow installation by using next playbooks
 
 rsync back from vagrant virtual box
 
-`vagrant ssh-config    - check actual IP address and private_key
-scp -rP 2222 -i /vagrant/.vagrant/machines/mgmt/virtualbox/private_key vagrant@127.0.0.1:~/* ~/tmp`
+vagrant ssh-config    - check actual IP address and private_key
+scp -rP 2222 -i /vagrant/.vagrant/machines/mgmt/virtualbox/private_key vagrant@127.0.0.1:~/* ~/tmp
 
 Recap of ansible steps to run this cool stuff
 
-`vagrant up            - setup all environment
+vagrant up            - setup all environment
 vagrant ssh mgmt      - connects to management node
 ansible --list-hosts  - display all known hosts
 ansible web1 -m ping  - check web1 node activation
@@ -35,4 +35,5 @@ ansible web1 -m setup -a "filter=ansible_distribution"
 ansible web1 -m setup -a "filter=ansible_distribution*"
 ansible web1 -m setup -a "filter=ansible_all_ipv4_addresses"
 sudo apt-get install apache2-utils - stress testing
-ab -n 10000 -c 25 http://localhost:8080/`
+ab -n 10000 -c 25 http://localhost:8080/
+
