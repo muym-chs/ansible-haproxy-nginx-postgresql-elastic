@@ -7,8 +7,8 @@ follow installation by using next playbooks
 
 rsync back from vagrant virtual box
 
-vagrant ssh-config    - check actual IP address and private_key
-scp -rP 2222 -i /vagrant/.vagrant/machines/mgmt/virtualbox/private_key vagrant@127.0.0.1:~/* ~/tmp
+    vagrant ssh-config - check actual IP address and private_key
+    scp -rP 2222 -i /vagrant/.vagrant/machines/mgmt/virtualbox/private_key vagrant@127.0.0.1:~/* ~/tmp - rsync back to host
 
 Recap of ansible steps to run this cool stuff
 
@@ -27,13 +27,13 @@ Recap of ansible steps to run this cool stuff
     ansible web1 -m apt -a "name=postgresql state=installed" --become - installing postgres
     ansible web1 -m copy -a "src=/home/vagrant/files/db.conf dest=/etc/db.conf mode=644 owner=root group=root" --sudo
     ansible web1 -m service -a "name=nginx state=restarted"
-    ansible all -m shell -a "uptime"
-    ansible all -m shell -a "uname -a"
-    ansible web -m shell -a "/sbin/reboot"
-    ansible web1 -m setup | less
+    ansible all -m shell -a "uptime"             - shell command
+    ansible all -m shell -a "uname -a"           - shell command
+    ansible web -m shell -a "/sbin/reboot"       - node reboot
+    ansible web1 -m setup | less                 - node gather information
     ansible web1 -m setup -a "filter=ansible_distribution"
     ansible web1 -m setup -a "filter=ansible_distribution*"
     ansible web1 -m setup -a "filter=ansible_all_ipv4_addresses"
     sudo apt-get install apache2-utils - stress testing
-    ab -n 10000 -c 25 http://localhost:8080/
+    ab -n 10000 -c 25 http://localhost:8080/     - benchmark
 
